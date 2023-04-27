@@ -1,9 +1,11 @@
 import sys
 input = sys.stdin.readline
-def solve(B):
-    c = 0
-    min_vv = 9999999
-    while c<=256:
+
+def solve(s,e,B):
+    c = s
+    min_vv = 99999
+    result = []
+    for c in range(s,e+1):
         block = B
         cnt = 0
         for i in range(N):
@@ -23,9 +25,19 @@ N,M,B = map(int,input().split())
 ground = [list(map(int,input().split())) for _ in range(N)]
 lst = []
 solve(B)
-lst.sort(key=lambda x:x[1], reverse=True)
-lst.sort(key=lambda x:x[0])
-print(*lst[0])
+
+
+N,M,B = map(int,input().split())
+ground = [list(map(int,input().split())) for _ in range(N)]
+e = 0
+s = 99999
+for i in range(N):
+    for j in range(M):
+        if e < ground[i][j]:
+            e = ground[i][j]
+        if s > ground[i][j]:
+            s = ground[i][j]
+lst = solve(s,e,B)
 
 
 
