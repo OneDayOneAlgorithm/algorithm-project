@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+
 def solve(s,e,B):
     c = s
     min_vv = 99999
@@ -12,15 +13,19 @@ def solve(s,e,B):
                 if c > ground[i][j]:
                     cnt += (c - ground[i][j])
                     block -= (c - ground[i][j])
-                elif c < ground[i][j]:
+                else:
                     cnt += (ground[i][j] - c)*2
                     block += (ground[i][j] - c)
-        if block < 0 :
-            continue
-        if cnt < min_vv:
+        if block >= 0:
             min_vv = cnt
-            result.append((min_vv, c))
-    return result
+            lst.append((cnt,c))
+        c += 1
+
+N,M,B = map(int,input().split())
+ground = [list(map(int,input().split())) for _ in range(N)]
+lst = []
+solve(B)
+
 
 N,M,B = map(int,input().split())
 ground = [list(map(int,input().split())) for _ in range(N)]
@@ -33,9 +38,6 @@ for i in range(N):
         if s > ground[i][j]:
             s = ground[i][j]
 lst = solve(s,e,B)
-lst.sort(key=lambda x:x[1], reverse=True)
-lst.sort(key=lambda x:x[0])
-print(*lst[0])
 
 
 
